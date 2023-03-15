@@ -1,0 +1,148 @@
+#: import settings settings
+
+<Labelslider@Label>:
+	Slider:
+		canvas.before:
+			Color:
+				rgba: 1,0,0,1
+			RoundedRectangle:
+				size:85,20
+				pos:self.x+10,self.y+40
+				radius:[12]
+		id:_slider
+		min:0
+		max:1
+		value:0
+		orientation:"horizontal"
+		step:1
+		value_track:True
+		value_track_color:[0,1,0,1]
+		value_track_width:10
+		cursor_size:[20,20]
+		cursor_image:"Pics/settings.png"
+		on_touch_move:
+			value_track_color=[1,0,0,1] if self.value == 0 else [0,1,0,1]
+			cursor_image="" if self.value == 0 else "Pics/settings.png"
+		center_x:self.parent.center_x
+		center_y:self.parent.center_y
+
+<SettingsScreen>:
+
+	FloatLayout:
+		BoxLayout:
+			canvas:
+				Color:
+					rgba:
+						1,.4,0,1
+				Rectangle:
+					size:self.size
+					pos:self.x,self.y
+		Label:
+			canvas.before:
+				Color:
+					rgba:0,1,0,.8
+				RoundedRectangle:
+					size:200,40
+					pos:self.center_x-100,self.center_y-20
+					radius:20,
+
+			text:"Mijn\nInstellingen"
+			halign:"center"
+			size_hint:1,1
+			font_size:dp(18)
+			bold:False
+			italic:False
+			pos_hint:{"center_x":.5,"center_y":.8}
+
+		GridLayout:
+			cols:2
+			spacing:10
+			padding:50
+			size:None,None
+			size:250,180
+			pos_hint:{"center_y":.26}
+
+			canvas.before:
+				Color:
+					rgba: 1,0.4,0,1
+				Rectangle:
+					size:self.width,self.height
+					pos:self.pos
+			Label:
+				text:"1"
+				size_hint:1,.1
+			Labelslider:
+				size_hint:1,.1
+			Label:
+				text:"3"
+				size_hint:1,.1
+			Labelslider:
+				size_hint:1,.1
+			Label:
+				text:"4"
+				size_hint:1,.1
+			Labelslider:
+				size_hint:1,.1
+			Label:
+				text:"5"
+				size_hint:1,.1
+			Labelslider:
+				size_hint:1,.1
+			Label:
+				text:"6"
+				size_hint:1,.1
+			Labelslider:
+				size_hint:1,.1
+			Label:
+				text:"7"
+				size_hint:1,.1
+			Labelslider:
+				size_hint:1,.1
+			Label:
+				text:"8"
+				size_hint:1,.1
+			Labelslider:
+				size_hint:1,.1
+
+
+	ActionBar:
+
+		size:self.width, 60
+		pos_hint:{"top":1}
+
+		canvas:
+			Color:
+				rgba:1,.5,0,1
+			Rectangle:
+				size:self.size
+				pos:self.pos
+
+		ActionView:
+			id: _toolbar
+			spacing:0
+
+			ActionPrevious:
+				color:0,0,0,1
+				title:"[size=18]DECA[/size]"
+				markup:True
+				with_previous:False
+				app_icon:"Pics/FlagofHolland.png"
+				app_icon_height:20
+				app_icon_width:20
+
+			ActionButton:
+				icon:"Pics/home.png.png"
+				background_color:1,0,1,.85
+				text:"Menu"
+				font_size:dp(14)
+				on_release:
+					root.manager.current="menuscreen"
+
+			ActionButton:
+				icon:"Pics/close.png"
+				background_color:1,0,1,.85
+				text:"Exit"
+				font_size:dp(14)
+				on_release:
+					quit()
+

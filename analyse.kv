@@ -1,0 +1,88 @@
+#: import analyse analyse
+
+<AnalyseScreen>:
+	#FloatLayout:
+	PageLayout:
+		border:10
+		Label
+			text:"Analyses 1!"
+		BoxLayout:
+			orientation:"vertical"
+			canvas:
+				Color:
+					rgba:0,1,0,.8
+				Rectangle:
+					size:self.size
+					pos:self.x,self.y
+			Label:
+				text:"Elektra"
+				font_size:dp(36)
+			Button:
+				size_hint:1,1
+				#pos_hint:{"center_y":.75}
+				text:"press 1"
+			Button:
+				size_hint:1,1
+				#pos_hint:{"center_y":.75}
+				text:"press 2"
+		BoxLayout:
+			orientation:"vertical"
+			canvas:
+				Color:
+					rgba:1,0,0,1
+				Rectangle:
+					size:self.size
+					pos:self.x,self.y
+			#pos_hint:{"center_y":.75}
+			Label:
+				text:"Gasverbruik"
+				font_size:dp(36)
+			Button:
+				size_hint:1,1
+				#pos_hint:{"center_y":.75}
+				text:"press 3"
+			Button:
+				size_hint:1,1
+				#pos_hint:{"center_y":.75}
+				text:"press 4"
+	ActionBar:
+
+		size:self.width, 60
+		pos_hint:{"top":1}
+
+		canvas:
+			Color:
+				#rgba:1,1,1,1
+				rgba:[0,1,0.4,.9]
+			Rectangle:
+				size:self.size
+				pos:self.pos
+
+		ActionView:
+			id: _toolbar
+			spacing:0
+
+			ActionPrevious:
+				color:0,0,0,.31
+				title: "[size=18]DECA[/size]"
+				markup:True
+				with_previous:False
+				app_icon:"Pics/FlagofHolland.png"
+				app_icon_height:20
+				app_icon_width:20
+
+			ActionButton:
+				icon:"Pics/home.png.png"
+				background_color:1,0,1,.85
+				text:"Menu"
+				font_size:dp(14)
+				on_release:
+					root.manager.current="menuscreen"
+
+			ActionButton:
+				icon:"Pics/close.png"
+				background_color:1,0,1,.85
+				text:"Exit"
+				font_size:dp(14)
+				on_release:
+					quit()

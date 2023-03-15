@@ -1,0 +1,440 @@
+#: import input input
+
+<Inputer@TextInput>:
+#	canvas.before:
+#		Color:
+#			rgba: [1,0.5,0,.75]
+#		RoundedRectangle:
+#			size: self.size
+#			pos: self.pos
+#			radius: 4,
+
+	multiline:False
+	write_tab:False
+	font_size:dp(18)
+	hint_text:"0"
+	size_hint: None,None
+	size:30,35
+	halign: "center"
+	valign:"center"
+	hint_text_color: (1,1,1,1)
+	input_filter:"int"
+	background_color:[1,0.5,0,1]
+	foreground_color:[1,1,1,1]
+	background_image: ""
+	background_normal: ""
+	background_active: ""
+
+<InputScreen>:
+	FloatLayout:
+		canvas:
+			Color:
+				rgba: [1,.5,0,1]
+			Rectangle:
+				size:self.width, self.height
+				pos:self.x,self.height/2
+				source:"Pics/huis.jpg"
+		Label:
+			id:_tijdstip
+			text:""
+			font_size:dp(12)
+			pos_hint:{"center_x":.1,"center_y":.9}
+		Label:
+			id:_datum
+			text:""
+			font_size:dp(12)
+			pos_hint:{"center_x":.8,"center_y":.9}
+
+		BoxLayout:
+			orientation:"horizontal"
+			Label:
+				canvas.before:
+					Color:
+						rgba:0,0,0,1
+					RoundedRectangle:
+						size:320,40
+						pos: self.center_x-160, self.center_y-20
+						radius:20,
+
+				text: "Invoer Energiegegevens"
+				font_size: dp(24)
+				color:1,1,1,1
+				halign: "center"
+				pos_hint:{"center_x":.5,"center_y":.75}
+
+		BoxLayout:
+			orientation:"vertical"
+			spacing:30
+			size_hint:.25,.1
+			pos_hint:{"center_x":.75,"center_y":.6}
+
+			Label:
+				level:38
+				id:_kwh_dal
+				font_size:dp(12)
+				halign:"center"
+				text:"Kwh dal\n" +str(self.level)+ " Kwh"
+			Label:
+				level:12
+				id:_kwh_normaal
+				font_size:dp(12)
+				halign:"center"
+				text:"Kwh normaal\n" + str(self.level) + " Kwh"
+			Label:
+				level:30
+				id:_gas
+				font_size:dp(12)
+				halign:"center"
+				text:"Gasverbruik\n" + str(self.level) + " m3"
+
+	BoxLayout:
+		orientation: "vertical"
+		size_hint:.9,.5
+		pos_hint:{"center_x":.65,"center_y":.24}
+
+		BoxLayout:
+			orientation: "vertical"
+			spacing:5
+
+			Label:
+				text: "Kwh daltarief\n "
+				size_hint:.45,1
+				font_size: dp(12)
+				halign:"left"
+
+			BoxLayout:
+				orientation: "horizontal"
+				spacing:5
+				Inputer:
+				Inputer:
+					id: _dalinput14
+					# bij enter naar volgende textinputbox invoeren normaaltarief...
+					on_text_validate: _dalinput24.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						#root.insert_text(self.text)
+						_dalinput24.focus = True if len(self.text) == 1 else False
+				Inputer:
+					id: _dalinput24
+					# bij enter naar volgende textinputbox invoeren normaaltarief...
+					on_text_validate: _dalinput34.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_dalinput34.focus = True if len(self.text) == 1 else False
+				Inputer:
+					id: _dalinput34
+					# bij enter naar volgende textinputbox invoeren normaaltarief...
+					on_text_validate: _dalinput44.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_dalinput44.focus = True if len(self.text) == 1 else False
+				Inputer:
+					id: _dalinput44
+					# bij enter naar volgende textinputbox invoeren normaaltarief...
+					on_text_validate: _dalinput34.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_normaalinput15.focus = True if len(self.text) == 1 else False
+				Button:
+					text: "Wijzig"
+					font_size:dp(10)
+					background_color:0,0,0,0
+					size_hint:None,None
+					size: 60,40
+					#pos_hint:{"center_x":.9}
+					on_press:
+						self.color = [1,0.5,0,1]
+						_dalinput14.text="";_dalinput24.text="";_dalinput34.text="";_dalinput44.text=""
+					on_release:
+						self.color = [1,1,1,1]
+						_dalinput14.focus= True
+
+
+		BoxLayout:
+			orientation: "vertical"
+			spacing:5
+
+			Label:
+				text: "Kwh normaaltarief\n "
+				size_hint:.45,1
+				font_size: dp(12)
+				halign:"left"
+
+			BoxLayout:
+				orientation: "horizontal"
+				spacing:5
+				Inputer:
+					id: _normaalinput15
+					on_text_validate: _normaalinput25.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_normaalinput25.focus= True if len(self.text.strip()) == 1 else False
+
+				Inputer:
+					id: _normaalinput25
+					on_text_validate: _normaalinput35.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_normaalinput35.focus= True if len(self.text.strip()) == 1 else False
+				Inputer:
+					id: _normaalinput35
+					on_text_validate: _normaalinput45.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_normaalinput45.focus= True if len(self.text.strip()) == 1 else False
+				Inputer:
+					id: _normaalinput45
+					on_text_validate: _normaalinput55.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_normaalinput55.focus= True if len(self.text.strip()) == 1 else False
+				Inputer:
+					id: _normaalinput55
+					on_text_validate: _dalinput_terug14.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_dalinput_terug14.focus = True if len(self.text.strip()) == 1 else False
+				Button:
+					text: "Wijzig"
+					font_size:dp(10)
+					background_color:0,0,0,0
+					size_hint:None,None
+					size: 60,40
+					on_press:
+						self.color = [1,0.5,0,1]
+						_normaalinput15.text="";_normaalinput25.text="";_normaalinput35.text="";_normaalinput45.text="";_normaalinput55.text=""
+					on_release:
+						self.color = [1,1,1,1]
+						_normaalinput15.focus= True
+
+		BoxLayout:
+			orientation: "vertical"
+			spacing:5
+			Label:
+				text: "Kwh daluren (retour)\n"
+				size_hint:.45,1
+				font_size: dp(12)
+				halign:"auto"
+			BoxLayout:
+				orientation: "horizontal"
+				spacing:5
+				Inputer:
+
+				Inputer:
+					id: _dalinput_terug14
+					on_text_validate: _dalinput_terug24.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_dalinput_terug24.focus = True if len(self.text.strip()) == 1 else False
+				Inputer:
+					id: _dalinput_terug24
+					on_text_validate: _dalinput_terug34.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_dalinput_terug34.focus = True if len(self.text.strip()) == 1 else False
+				Inputer:
+					id: _dalinput_terug34
+					on_text_validate: _dalinput_terug44.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_dalinput_terug44.focus = True if len(self.text.strip()) == 1 else False
+				Inputer:
+					id: _dalinput_terug44
+					on_text_validate: _normaalinput_terug15.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_normaalinput_terug15.focus = True if len(self.text.strip()) == 1 else False
+				Button:
+					text: "Wijzig"
+					font_size:dp(10)
+					background_color:0,0,0,0
+					size_hint:None,None
+					size: 60,40
+					on_press:
+						self.color = [1,0.5,0,1]
+						_dalinput_terug14.text="";_dalinput_terug24.text="";_dalinput_terug34.text="";_dalinput_terug44.text=""
+					on_release:
+						self.color = [1,1,1,1]
+						_dalinput_terug14.focus= True
+
+		BoxLayout:
+			orientation: "vertical"
+			spacing:5
+
+			Label:
+				text: "Kwh normaaluren (retour)\n "
+				size_hint:.45,1
+				font_size: dp(12)
+				halign:"left"
+
+			BoxLayout:
+				orientation: "horizontal"
+				spacing:5
+
+				Inputer:
+					id: _normaalinput_terug15
+					on_text_validate: _normaalinput_terug25.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_normaalinput_terug25.focus = True if len(self.text.strip()) == 1 else False
+				Inputer:
+					id: _normaalinput_terug25
+					on_text_validate: _normaalinput_terug35.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_normaalinput_terug35.focus = True if len(self.text.strip()) == 1 else False
+				Inputer:
+					id: _normaalinput_terug35
+					on_text_validate: _normaalinput_terug45.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_normaalinput_terug45.focus = True if len(self.text.strip()) == 1 else False
+				Inputer:
+					id: _normaalinput_terug45
+					on_text_validate: _normaalinput_terug55.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_normaalinput_terug55.focus = True if len(self.text.strip()) == 1 else False
+
+				Inputer:
+					id: _normaalinput_terug55
+					on_text_validate: _gasinput14.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_gasinput14.focus = True if len(self.text.strip()) == 1 else False
+				Button:
+					text: "Wijzig"
+					font_size:dp(10)
+					background_color:0,0,0,0
+					size_hint:None,None
+					size: 60,40
+					on_press:
+						self.color = [1,0.5,0,1]
+						_normaalinput_terug15.text="";_normaalinput_terug25.text="";_normaalinput_terug35.text="";_normaalinput_terug45.text="";_normaalinput_terug55.text=""
+					on_release:
+						self.color = [1,1,1,1]
+						_normaalinput_terug15.focus= True
+
+		BoxLayout:
+			orientation: "vertical"
+			spacing:5
+
+			Label:
+				text: "m3 gasverbruik\n "
+				size_hint:.45,1
+				font_size: dp(12)
+
+			BoxLayout:
+				orientation: "horizontal"
+				spacing:5
+				Inputer:
+
+				Inputer:
+					id: _gasinput14
+					on_text_validate: _gasinput24.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_gasinput24.focus = True if len(self.text.strip()) == 1 else False
+				Inputer:
+					id: _gasinput24
+					on_text_validate: _gasinput34.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_gasinput34.focus = True if len(self.text.strip()) == 1 else False
+				Inputer:
+					id: _gasinput34
+					on_text_validate: _gasinput44.focus = True
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_gasinput44.focus = True if len(self.text.strip()) == 1 else False
+				Inputer:
+					id: _gasinput44
+					on_text:
+						self.readonly = True if len(self.text.strip()) == 1 else False
+						_gasinput44.focus = False if len(self.text.strip()) == 1 else True
+				Button:
+					text: "Wijzig"
+					font_size:dp(10)
+					background_color:0,0,0,0
+					size_hint:None,None
+					size: 60,40
+					on_press:
+						self.color = [1,0.5,0,1]
+						_gasinput14.text="";_gasinput24.text="";_gasinput34.text="";_gasinput44.text=""
+					on_release:
+						self.color = [1,1,1,1]
+						_gasinput14.focus= True
+		Label:
+			text:""
+			size_hint:1,.15
+
+		Button:
+			canvas.before:
+				Color:
+					rgba:1,0.5,0,1
+				RoundedRectangle:
+					size:120,40
+					pos: self.x,self.y
+					radius:20,
+
+			text: "Submit"
+			font_size:dp(16)
+			background_color:0,0,0,0
+			font_color:0,0,0,0
+			size_hint:None,None
+			size: 100,40
+			pos_hint:{"center_y":.1}
+			on_press:
+				pass
+			on_release:
+				self.font_color=1,0,0,1
+				_kwh_dal.level = int(str(_dalinput14.text)+str(_dalinput24.text)+str(_dalinput34.text)+str(_dalinput44.text))
+				_kwh_normaal.level = int(str(_normaalinput15.text) + str(_normaalinput25.text)+str(_normaalinput35.text)+str(_normaalinput45.text)+str(_normaalinput55.text))
+				_gas.level = int(str(_gasinput14.text)+str(_gasinput24.text)+str(_gasinput34.text)+str(_gasinput44.text))
+		Label:
+			text:""
+			size_hint:1,.3
+
+	ActionBar:
+
+		size:self.width, 60
+		pos_hint:{"top":1}
+
+		canvas:
+			Color:
+				rgba:1,.5,0,1
+			Rectangle:
+				size:self.size
+				pos:self.pos
+
+		ActionView:
+			id: _toolbar
+			spacing:0
+
+			ActionPrevious:
+				color:0,0,0,1
+				title:"[size=18]DECA[/size]"
+				markup:True
+				with_previous:False
+				app_icon:"Pics/FlagofHolland.png"
+				app_icon_height:20
+				app_icon_width:20
+
+			ActionButton:
+				icon:"Pics/home.png.png"
+				background_color:1,0,1,.85
+				text:"Menu"
+				font_size:dp(14)
+				on_release:
+					root.manager.current="menuscreen"
+
+			ActionButton:
+				icon:"Pics/close.png"
+				background_color:1,0,1,.85
+				text:"Exit"
+				font_size:dp(14)
+				on_release:
+					quit()
+
+
+

@@ -1,0 +1,217 @@
+#: import stats stats
+
+<BarHor@Label>:
+	size_hint:None,None
+	height:15
+	font_size:dp(10)
+	text: format((self.level*10),".1f") +"%"
+	color: 1,1,1,1
+	level: 0
+	pos_hint:{"center_x":.5,"center_y":.5}
+
+	canvas.before:
+		Color:
+			rgba:1,1,1,1
+		Rectangle:
+			size:101,self.height
+			pos:self.pos
+		Color:
+			rgba:0,0,0,.6
+		Rectangle:
+			size: self.level*10,self.height-2
+			pos:self.x+1, self.center_y-4
+
+<BarVer@Label>:
+	size_hint:None,None
+	width:20
+	height:101
+	#text: format(self.level,".1f") +"%"
+	font_size:dp(8)
+	color:0,0,0,.5
+	level:0
+	pos_hint:{"center_x":.5,"center_y":.5}
+	#valign:"top"
+	canvas.before:
+		Color:
+			rgba:1,1,1,1
+		RoundedRectangle:
+			size: 20,self.height
+			pos:self.pos
+		Color:
+			rgba:0,1,0,1
+		RoundedRectangle:
+			size: self.width-6,self.level
+			pos:self.center_x-7, self.y+0
+
+<StatsScreen>:
+
+	FloatLayout:
+		Label:
+			canvas.before:
+				Color:
+					rgba:0,1,0,.8
+				RoundedRectangle:
+					size:200,40
+					pos:self.center_x-100,self.center_y-20
+					radius:20,
+
+			text:"Mijn\nStatistieken"
+			halign:"center"
+			size_hint:1,1
+			font_size:dp(24)
+			bold:False
+			italic:False
+			pos_hint:{"center_x":.5,"center_y":.8}
+
+		BoxLayout:
+			padding:50
+			spacing:20
+			pos_hint:{"center_x":.5,"center_y":.9}
+
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:[1,.2]
+
+				BarVer:
+					level:76
+				Label:
+					text:"jan"
+					size_hint:1,.05
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:[1,.2]
+				BarVer:
+					level:36
+				Label:
+					text:"feb"
+					size_hint:1,.05
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:[1,.2]
+				BarVer:
+					level:60
+				Label:
+					text:"mrt"
+					size_hint:1,.05
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:[1,.2]
+				BarVer:
+					level:45
+				Label:
+					text:"apr"
+					size_hint:1,.05
+
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:[1,.2]
+				BarVer:
+					level:6
+				Label:
+					text:"mei"
+					size_hint:1,.05
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:[1,.2]
+				BarVer:
+					level:96
+				Label:
+					text:"jun"
+					size_hint:1,.05
+
+		BoxLayout:
+			padding:50
+			spacing:20
+			pos_hint:{"center_x":.5,"center_y":.70}
+
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:[1,.2]
+
+				BarVer:
+					level:76
+				Label:
+					text:"jul"
+					size_hint:1,.05
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:[1,.2]
+				BarVer:
+					level:36
+				Label:
+					text:"aug"
+					size_hint:1,.05
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:[1,.2]
+				BarVer:
+					level:60
+				Label:
+					text:"sep"
+					size_hint:1,.05
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:[1,.2]
+				BarVer:
+					level:45
+				Label:
+					text:"okt"
+					size_hint:1,.05
+
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:[1,.2]
+				BarVer:
+					level:6
+				Label:
+					text:"nov"
+					size_hint:1,.05
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:[1,.2]
+				BarVer:
+					level:96
+				Label:
+					text:"dec"
+					size_hint:1,.05
+
+		ActionBar:
+
+			size:self.width, 60
+			pos_hint:{"top":1}
+
+			canvas:
+				Color:
+					rgba:[0,1,0.4,.9]
+				Rectangle:
+					size:self.size
+					pos:self.pos
+
+			ActionView:
+				id: _toolbar
+				spacing:0
+
+				ActionPrevious:
+					color:0,0,0,.31
+					title:"[size=18]DECA[/size]"
+					markup:True
+					with_previous:False
+					app_icon:"Pics/FlagofHolland.png"
+					app_icon_height:20
+					app_icon_width:20
+
+				ActionButton:
+					icon:"Pics/home.png.png"
+					background_color:1,0,1,.85
+					text:"Menu"
+					font_size:dp(14)
+					on_release:
+						root.manager.current="menuscreen"
+
+				ActionButton:
+					icon:"Pics/close.png"
+					background_color:1,0,1,.85
+					text:"Exit"
+					font_size:dp(14)
+					on_release:
+						quit()
